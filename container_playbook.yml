@@ -1,11 +1,13 @@
 ---
 - name: Deploy appication
   hosts: appnodes
+  gather_facts: false
   become: true
   vars:
     host_port: 8080
     container_port: 8080
-    color: "GREEN"
+    # red, green, blue, darkblue, pink
+    color: "green"
     tree: "trunk"
     
   tasks:
