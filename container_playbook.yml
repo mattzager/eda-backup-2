@@ -1,5 +1,5 @@
 ---
-- name: Playbook to setup prereqs
+- name: Deploy appication
   hosts: appnodes
   become: true
   vars:
