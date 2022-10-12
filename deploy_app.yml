@@ -7,8 +7,9 @@
     host_port: 8080
     container_port: 8080
     # red, green, blue, ansiblue, pink, darkblue
-    color: "green"
-    # tree: "trunk"
+    color: "blue"
+    repo_pusher: "{{ event.commit.author.name }}"
+    repo_ref: "{{ event.gitref }}"
     
   tasks:
   
@@ -22,7 +23,5 @@
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
-            # tree: "{{ tree }}"
-            PUSHER:
-            GITREF:
-            
+            PUSHER: "{{ repo_pusher }}"
+            GITREF: "{{ repo_ref }}"
