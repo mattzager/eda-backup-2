@@ -8,8 +8,8 @@
     container_port: 8080
     # red, green, blue, ansiblue, pink, darkblue
     color: "blue"
-    repo_pusher: "{{ event.commit.author.name }}"
-    repo_ref: "{{ event.gitref }}"
+    repo_pusher: "{{ event.eauthor }}"
+    repo_ref: "{{ event.eref }}"
     
   tasks:
   
