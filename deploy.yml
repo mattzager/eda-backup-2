@@ -4,13 +4,14 @@
   gather_facts: false
   become: true
   vars:
-    host_port:      "{{ '8081' if event.etype == \"pull_request\" else '8080'}}"
-    container_port: "{{ '8081' if event.etype == \"pull_request\" else '8080'}}"
-    
     # red, green, blue, ansiblue, pink, darkblue
-    color:       "blue"
-    repo_pusher: "{{ event.eauthor }}"
-    repo_ref:    "{{ event.eref }}"
+    color:          "blue"
+
+    # these vars are populated from gitea eavents
+    host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    container_port: "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    repo_pusher:    "{{ event.eauthor }}"
+    repo_ref:       "{{ event.eref }}"
     
   tasks:
     - name: Print event data
