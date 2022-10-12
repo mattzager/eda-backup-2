@@ -6,20 +6,23 @@
   vars:
     host_port: 8080
     container_port: 8080
-    # red, green, blue, darkblue, pink
+    # red, green, blue, ansiblue, pink, darkblue
     color: "green"
-    tree: "trunk"
+    # tree: "trunk"
     
   tasks:
   
     - name: Create a color container
       containers.podman.podman_container:
         name: colors
-        image: docker.io/mmumshad/simple-webapp-color:latest
+        image: quay.io/acme_corp/eda-app:latest
         state: started
         network: host
         ports:
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
-            tree: "{{ tree }}"
+            # tree: "{{ tree }}"
+            PUSHER:
+            GITREF:
+            
