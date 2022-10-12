@@ -12,6 +12,9 @@
     repo_ref: "{{ event.eref }}"
     
   tasks:
+    - name: Print event data
+      ansible.builtin.debug:
+        var: event
   
     - name: Create a color container
       containers.podman.podman_container:
