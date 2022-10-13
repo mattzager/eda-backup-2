@@ -9,7 +9,7 @@
 
     # these vars are populated based on gitea eavents
     host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
-    container_port: "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    container_port: 8080
     container_name: "{{ 'colors-dev' if event.etype == 'pull_request' else 'colors' }}"
     repo_pusher:    "{{ event.eauthor }}"
     repo_ref:       "{{ event.eref }}"
@@ -19,9 +19,15 @@
       ansible.builtin.debug:
         var: event
 
-    - name: Print ports2
+    - name: Print app vars
       ansible.builtin.debug:
-        msg: "Host: {{host_port }} - Container {{ container_port }}"
+        msg: |
+          "
+          Container name: {{ container_name }}
+          Host port: {{ host_port }}
+          Container port: {{ container_port }}
+          Repo ref: {{ repo_ref }}
+          "
   
     - name: Create a color container
       containers.podman.podman_container:
@@ -37,6 +43,6 @@
             GITREF: "{{ repo_ref }}"
       register: container
 
-    - name: print container
+    - name: Print container
       debug:
         var: container
