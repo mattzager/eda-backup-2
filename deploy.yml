@@ -9,6 +9,7 @@
 
     # these vars are populated based on gitea eavents
     host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    # app runs on 8080 so don't change unless app.py modified and image pushed
     container_port: 8080
     container_name: "{{ 'colors-dev' if event.etype == 'pull_request' else 'colors' }}"
     repo_pusher:    "{{ event.eauthor }}"
