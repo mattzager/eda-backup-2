@@ -36,7 +36,7 @@
         image: quay.io/acme_corp/eda-app:latest
         state: started
         recreate: true
-        network: host
+        network: bridge
         ports:
             - "{{ host_port }}:{{ container_port }}"
         env:
