@@ -5,11 +5,12 @@
   become: true
   vars:
     # red, green, blue, ansiblue, pink, darkblue
-    color:          "blue"
+    color:          "green"
 
-    # these vars are populated from gitea eavents
+    # these vars are populated based on gitea eavents
     host_port:      "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
     container_port: "{{ '8081' if event.etype == 'pull_request' else '8080'}}"
+    container_name: "{{ 'colors-dev' if event.etype == 'pull_request' else 'colors' }}"
     repo_pusher:    "{{ event.eauthor }}"
     repo_ref:       "{{ event.eref }}"
     
@@ -17,10 +18,14 @@
     - name: Print event data
       ansible.builtin.debug:
         var: event
+
+    - name: Print ports2
+      ansible.builtin.debug:
+        msg: "Host: {{host_port }} - Container {{ container_port }}"
   
     - name: Create a color container
       containers.podman.podman_container:
-        name: colors
+        name: "{{ container_name }}"
         image: quay.io/acme_corp/eda-app:latest
         state: started
         network: host
@@ -30,3 +35,8 @@
             APP_COLOR: "{{ color }}"
             PUSHER: "{{ repo_pusher }}"
             GITREF: "{{ repo_ref }}"
+      register: container
+
+    - name: print container
+      debug:
+        var: container
