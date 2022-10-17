@@ -6,3 +6,5 @@
 Some of the attributes of this application can be modified by adjusting variables defined in `deploy.yml`
 
 Variables are defined conditionally based on events from a git provider like Gitea.
+
+The application resides in the `app` directory and can be built with the included Dockerfile.
