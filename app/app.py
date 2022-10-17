@@ -31,7 +31,7 @@ COLOR = random.choice(["red", "green", "blue", "ansiblue", "darkblue", "pink"])
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], pusher=PUSHER_FROM_ENV, gitref=GITREF_FROM_ENV)
+    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], pusher=PUSHER_FROM_ENV, gitref=GITREF_FROM_ENV, image=IMAGE_FROM_ENV)
 
 
 if __name__ == "__main__":
