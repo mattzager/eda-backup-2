@@ -21,7 +21,7 @@ SUPPORTED_COLORS = ",".join(color_codes.keys())
 
 # Get color from Environment variable
 COLOR_FROM_ENV = os.environ.get('APP_COLOR')
-IMAGE_FROM_ENV = os.environ.get('IMAGE') or str("https://github.com/ansible/instruqt/blob/main/assets/ansible-demo.png?raw=true")
+IMAGE_FROM_ENV = os.environ.get('APP_IMAGE') or str("https://github.com/ansible/instruqt/blob/main/assets/ansible-demo.png?raw=true")
 GITREF_FROM_ENV = os.environ.get('GITREF') or str("not specified")
 PUSHER_FROM_ENV = os.environ.get('PUSHER') or str("not specified")
 # Generate a random color
