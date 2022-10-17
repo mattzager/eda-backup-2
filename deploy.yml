@@ -46,6 +46,7 @@
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
+            APP_IMAGE: "{{ image }}"
             PUSHER: "{{ repo_pusher }}"
             GITREF: "{{ repo_ref }}"
       register: container
