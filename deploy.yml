@@ -6,7 +6,6 @@
   vars:
     # red, green, blue, ansiblue, pink, darkblue
     color:          "green"
-    image:          "https://github.com/ansible/instruqt/blob/main/assets/ansible-demo.png?raw=true"
 
     # these vars are populated based on gitea eavents
     # if the incoming git event is that of a pull request,
@@ -46,7 +45,6 @@
             - "{{ host_port }}:{{ container_port }}"
         env:
             APP_COLOR: "{{ color }}"
-            APP_IMAGE: "{{ image }}"
             PUSHER: "{{ repo_pusher }}"
             GITREF: "{{ repo_ref }}"
       register: container
