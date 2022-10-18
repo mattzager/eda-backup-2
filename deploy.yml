@@ -20,19 +20,10 @@
     repo_ref:       "{{ event.eref }}"
     
   tasks:
-    - name: Print event data
-      ansible.builtin.debug:
-        var: event
-
-    - name: Print app vars
-      ansible.builtin.debug:
-        msg: |
-          "
-          Container name: {{ container_name }}
-          Host port: {{ host_port }}
-          Container port: {{ container_port }}
-          Repo ref: {{ repo_ref }}
-          "
+    - name: Podman install
+      ansible.builtin.package:
+        name: podman
+        state: present
   
     - name: Create a color container
       containers.podman.podman_container:
