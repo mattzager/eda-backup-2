@@ -28,7 +28,7 @@
     - name: Create a color container
       containers.podman.podman_container:
         name: "{{ container_name }}"
-        image: quay.io/acme_corp/eda-app:latest
+        image: quay.io/acme_corp/eda-app:suncavanaugh
         state: started
         recreate: true
         network: bridge
