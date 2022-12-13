@@ -11,12 +11,17 @@
 
   tasks:
 
-  - name: remove container
+  - name: Install podman
+    ansible.builtin.package:
+      name: podman
+      state: present
+
+  - name: Remove existing container if present
     containers.podman.podman_container:
       name: colors
       state: absent
 
-  - name: Create the application
+  - name: Create the application container
     containers.podman.podman_container:
       name: colors
       image: quay.io/acme_corp/eda-app:{{ tag }}
@@ -28,7 +33,7 @@
           APP_COLOR: "{{ color }}"
     register: container
 
-  - name: Curl URL of SunCavanaugh application
+  - name: Curl URL of application
     ansible.builtin.uri:
       url: "http://localhost:{{ host_port }}"
       return_content: yes
