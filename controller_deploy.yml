@@ -35,4 +35,4 @@
 
   - name: App location
     ansible.builtin.debug:
-      msg: "{{ ansible_facts['network_interfaces']['association']['public_dns_name'] }}:{{ host_port }}"
+      msg: "{{ hostvars['colin-app'].network_interfaces.association.public_dns_name }}"
