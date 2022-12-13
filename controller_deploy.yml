@@ -32,7 +32,3 @@
     ansible.builtin.uri:
       url: "http://localhost:{{ host_port }}"
       return_content: yes
-
-  - name: App location
-    ansible.builtin.debug:
-      msg: "{{ hostvars['colin-app'].network_interfaces.association.public_dns_name }}"
