@@ -1,0 +1,41 @@
+---
+- name: Deploy appication
+  hosts: appnodes
+  gather_facts: false
+  become: true
+  vars:
+    color: green
+    host_port: 8080
+    container_port: 8080
+
+  tasks:
+
+  - name: remove container
+    containers.podman.podman_container:
+      name: colors
+      state: absent
+
+  # - name: Pause for 5 seconds to apply fw rules
+  #   ansible.builtin.pause:
+  #     seconds: 5
+
+  - name: Create the application
+    containers.podman.podman_container:
+      name: colors
+      image: quay.io/acme_corp/eda-app:suncavanaugh
+      state: started
+      recreate: true
+      ports:
+          - "{{ host_port }}:{{ container_port }}"
+      env:
+          APP_COLOR: "{{ color }}"
+    register: container
+
+  - name: Curl URL of SunCavanaugh application
+    ansible.builtin.uri:
+      url: "http://localhost:{{ host_port }}"
+      return_content: yes
+
+  - name: Show ip of host
+    ansible.builtin.debug:
+      var: ansible_default_ipv4.address
