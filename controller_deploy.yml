@@ -7,6 +7,7 @@
     color: green
     host_port: 8080
     container_port: 8080
+    tag: latest
 
   tasks:
 
@@ -22,7 +23,7 @@
   - name: Create the application
     containers.podman.podman_container:
       name: colors
-      image: quay.io/acme_corp/eda-app:suncavanaugh
+      image: quay.io/acme_corp/eda-app:{{ tag }}
       state: started
       recreate: true
       ports:
