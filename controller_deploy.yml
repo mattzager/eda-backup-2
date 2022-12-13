@@ -16,10 +16,6 @@
       name: colors
       state: absent
 
-  # - name: Pause for 5 seconds to apply fw rules
-  #   ansible.builtin.pause:
-  #     seconds: 5
-
   - name: Create the application
     containers.podman.podman_container:
       name: colors
@@ -37,6 +33,6 @@
       url: "http://localhost:{{ host_port }}"
       return_content: yes
 
-  - name: Show ip of host
+  - name: App location
     ansible.builtin.debug:
-      var: ansible_default_ipv4.address
+      msg: {{ ansible_facts['network_interfaces']['association']['public_dns_name'] }}:{{ host_port }}
