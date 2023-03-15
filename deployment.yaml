@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suncav-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: suncav-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: suncav-app
+    spec:
+      containers:
+      - name: suncav-app
+        image: quay.io/acme_corp/eda-app:suncavanaugh
+        ports:
+        - containerPort: 8080
