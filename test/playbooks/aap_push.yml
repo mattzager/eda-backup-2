@@ -8,17 +8,6 @@
     debug:
       msg: "{{ awx_webhook_payload.repository.clone_url }} {{ awx_webhook_payload.repository.name }}"
 
-  - name: push -- Check if repo exists locally
-    ansible.builtin.stat:
-      path: "/tmp/{{ awx_webhook_payload.repository.name }}"
-
-  - name: push -- Clone application repository 
-    ansible.builtin.git:
-      repo: "{{ awx_webhook_payload.repository.clone_url }}"
-      dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
-      clone: true
-      update: true
-
   - name: push -- Update application repository to event ref 
     ansible.builtin.git:
       repo: "{{ awx_webhook_payload.repository.clone_url }}"
