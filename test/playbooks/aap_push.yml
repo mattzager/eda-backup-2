@@ -10,7 +10,7 @@
 
   - name: push -- Clone application repository 
     ansible.builtin.git:
-      repo: "{{ awx_webhook_payload.repository.clone_url | urlsplit('scheme') }}://{{ gituser | urlencode }}:{{ gitpass | urlencode }}@{{ ansible_eda.event.clone_url | urlsplit('hostname') }}{{ ansible_eda.event.clone_url | urlsplit('path') }}"
+      repo: "{{ awx_webhook_payload.repository.clone_url }}"
       dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
       clone: true
       update: true
@@ -19,7 +19,7 @@
 
   - name: push -- Update application repository to event ref 
     ansible.builtin.git:
-      repo: "{{ awx_webhook_payload.repository.clone_url | urlsplit('scheme') }}://{{ gituser | urlencode }}:{{ gitpass | urlencode }}@{{ ansible_eda.event.clone_url | urlsplit('hostname') }}{{ ansible_eda.event.clone_url | urlsplit('path') }}"
+      repo: "{{ awx_webhook_payload.repository.clone_url }}"
       dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
       clone: true
       update: true
