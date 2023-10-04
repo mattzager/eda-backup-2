@@ -11,7 +11,7 @@
 
   - name: push -- Clone application repository 
     ansible.builtin.git:
-      repo: "{{ ansible_eda.event.clone_url }}"
+      repo: "{{ ansible_eda.event.ssh_url }}"
       dest: "/tmp/{{ ansible_eda.event.repo_name }}"
       key_file: ~/.ssh/id_rsa
       clone: true
@@ -21,7 +21,7 @@
 
   - name: push -- Update application repository to event ref 
     ansible.builtin.git:
-      repo: "{{ ansible_eda.event.clone_url }}"
+      repo: "{{ ansible_eda.event.ssh_url }}"
       dest: "/tmp/{{ ansible_eda.event.repo_name }}"
       clone: true
       update: true
