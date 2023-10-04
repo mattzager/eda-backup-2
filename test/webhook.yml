@@ -28,7 +28,7 @@
   # Run action in response to push events
   - name: Respond to push event
     condition: event.repo_name == "eda-app" and event.type == "push"
-    action:
+      action:
       run_playbook:
         name: playbooks/on_push.yml
         post_events: true
