@@ -1,1 +1,36 @@
 ---
+- name: push -- update application repo
+  hosts: appnodes
+  gather_facts: false
+  tasks:
+  - name: push -- Check if repo exists locally
+    ansible.builtin.stat:
+      path: "/tmp/{{ awx_webhook_payload.repository.name }}"
+    register: repo_stat
+
+  - name: push -- Clone application repository 
+    ansible.builtin.git:
+      repo: "{{ awx_webhook_payload.repository.clone_url | urlsplit('scheme') }}://{{ gituser | urlencode }}:{{ gitpass | urlencode }}@{{ ansible_eda.event.clone_url | urlsplit('hostname') }}{{ ansible_eda.event.clone_url | urlsplit('path') }}"
+      dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
+      clone: true
+      update: true
+    when: repo_stat.stat.exists == false
+    register: repo_cloned
+
+  - name: push -- Update application repository to event ref 
+    ansible.builtin.git:
+      repo: "{{ awx_webhook_payload.repository.clone_url | urlsplit('scheme') }}://{{ gituser | urlencode }}:{{ gitpass | urlencode }}@{{ ansible_eda.event.clone_url | urlsplit('hostname') }}{{ ansible_eda.event.clone_url | urlsplit('path') }}"
+      dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
+      clone: true
+      update: true
+      version: "{{ awx_webhook_payload.ref | split('/') | last }}"
+    register: repo_cloned
+
+  - set_fact:
+      cacheable: true
+      repo_stat: "{{ repo_stat }}"
+      cloned: "{{ repo_cloned }}"
+      etype: "{{ awx_webhook_event_type }}"
+      erepo: "{{ awx_webhook_payload.repository.name }}"
+      eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
+      eauthor: "{{ awx_webhook_payload.pusher.name }}"
