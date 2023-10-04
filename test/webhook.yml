@@ -13,7 +13,7 @@
 
   rules:
   # Capture push events on main
-    - name: Get push event details
+  - name: Get push event details
       condition: event.meta.headers.X_Gitea_Event == "push"
       action:
         post_event:
