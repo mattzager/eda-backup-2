@@ -4,10 +4,11 @@
   gather_facts: false
   tasks:
 
-  - name: Hello Message
+  - name: Debug Message
     debug:
       msg: "{{ awx_webhook_payload.repository.clone_url }} {{ awx_webhook_payload.repository.name }}"
-
+  
+  # Pull app from git
   - name: push -- Update application repository to event ref 
     ansible.builtin.git:
       repo: "{{ awx_webhook_payload.repository.clone_url }}"
@@ -16,3 +17,9 @@
       clone: true
       update: true
       version: "{{ awx_webhook_payload.ref | split('/') | last }}"
+  
+  # Deploy application after push/pull_request events
+  - name: Run application deploy playbook
+    action:
+      run_playbook:
+        name: /tmp/eda-app/deploy.yml
