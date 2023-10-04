@@ -1,6 +1,7 @@
 ---
 - name: push -- update application repo
   hosts: appnodes
+  remote_user: student1
   gather_facts: false
   tasks:
 
