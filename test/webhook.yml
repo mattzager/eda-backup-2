@@ -22,7 +22,7 @@
           gitref: "{{ event.payload.ref }}"
           repo_name: "{{ event.payload.repository.name }}"
           author: "{{ event.payload.head_commit.author.username }}"
-          clone_url="{{ event.payload.repository.clone_url | urlsplit }}"
+          clone_url: "{{ event.payload.repository.clone_url | urlsplit }}"
           #clone_url: "{{ event.payload.repository.clone_url }}"
 
 
