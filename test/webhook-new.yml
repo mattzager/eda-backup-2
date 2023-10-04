@@ -58,3 +58,4 @@
       action:
         run_playbook:
           name: /tmp/eda-app/deploy.yml
+
