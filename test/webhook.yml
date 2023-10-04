@@ -32,6 +32,9 @@
     action:
       run_playbook:
         name: playbooks/on_push.yml
+        extra_vars:
+          gituser: "{{ githubuser }}"
+          gitpass: "{{ githubpassword }}"
         post_events: true
 
 
