@@ -13,6 +13,7 @@
     ansible.builtin.git:
       repo: "{{ ansible_eda.event.clone_url }}"
       dest: "/tmp/{{ ansible_eda.event.repo_name }}"
+      key_file: ~/.ssh/id_rsa
       clone: true
       update: true
     when: repo_stat.stat.exists == false
