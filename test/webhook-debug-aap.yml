@@ -1,5 +1,5 @@
 - name: Webhook Sample
-  hosts: all
+  hosts: appnodes
   tasks:
     - name: Hello Message
       debug:
