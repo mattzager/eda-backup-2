@@ -15,20 +15,20 @@
   # Capture push events on main
   - name: Get push event details
     condition: event.meta.headers.X_Gitea_Event == "push"
-      action:
-        post_event:
-          event:
-            type: "{{ event.meta.headers.X_Gitea_Event }}"
-            gitref: "{{ event.payload.ref }}"
-            repo_name: "{{ event.payload.repository.name }}"
-            author: "{{ event.payload.head_commit.author.username }}"
-            clone_url: "{{ event.payload.repository.clone_url }}"
+    action:
+      post_event:
+        event:
+          type: "{{ event.meta.headers.X_Gitea_Event }}"
+          gitref: "{{ event.payload.ref }}"
+          repo_name: "{{ event.payload.repository.name }}"
+          author: "{{ event.payload.head_commit.author.username }}"
+          clone_url: "{{ event.payload.repository.clone_url }}"
 
 
   # Run action in response to push events
   - name: Respond to push event
     condition: event.repo_name == "eda-app" and event.type == "push"
-      action:
+    action:
       run_playbook:
         name: playbooks/on_push.yml
         post_events: true
