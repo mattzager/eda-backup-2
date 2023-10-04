@@ -12,6 +12,7 @@
   - name: push -- Update application repository to event ref 
     ansible.builtin.git:
       repo: "{{ awx_webhook_payload.repository.clone_url }}"
+      accept_hostkey: true
       dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
       clone: true
       update: true
