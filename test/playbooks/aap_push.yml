@@ -6,7 +6,7 @@
 
   - name: Hello Message
     debug:
-      msg: {{ awx_webhook_payload.repository.clone_url }} {{ awx_webhook_payload.repository.name }}
+      msg: "{{ awx_webhook_payload.repository.clone_url }} {{ awx_webhook_payload.repository.name }}""
 
   - name: push -- Check if repo exists locally
     ansible.builtin.stat:
