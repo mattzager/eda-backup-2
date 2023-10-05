@@ -14,14 +14,14 @@
 
   # Run action in response to push events
   - name: Respond to push event
-    import_playbook: playbooks/on_push.yml
+    include_tasks: playbooks/on_push.yml
     when: ansible_facts['etype'] == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
-    import_playbook: playbooks/on_pr.yml
+    include_tasks: playbooks/on_pr.yml
     when: ansible_facts['etype'] == "pull_request"
 
   # Run action in response to push events
-  - name: Deploy application
-    import_playbook: /tmp/eda-app/deploy.yml
+  #- name: Deploy application
+  #  import_playbook: /tmp/eda-app/deploy.yml
