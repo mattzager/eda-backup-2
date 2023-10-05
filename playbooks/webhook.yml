@@ -16,14 +16,18 @@
 # Run action in response to push events
 - name: Respond to push event
   hosts: prodnodes
+  gather_facts: false
+  tasks:
   include_tasks: on_push.yml
-    when:
-      - etype == "push"
-      - eref == "main"
+  when:
+    - etype == "push"
+    - eref == "main"
       
 # Run action in response to push events
 - name: Respond to pull request event
   hosts: devnodes
+  gather_facts: false
+  tasks:
   include_tasks: on_pr.yml
-    when:
-      - etype == "pull_request"
+  when:
+    - etype == "pull_request"
