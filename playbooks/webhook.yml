@@ -15,12 +15,12 @@
   # Run action in response to push events
   - name: Respond to push event
     include_tasks: playbooks/on_push.yml
-    when: ansible_facts['etype'] == "push"
+    when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
     include_tasks: playbooks/on_pr.yml
-    when: ansible_facts['etype'] == "pull_request"
+    when: etype == "pull_request"
 
   # Run action in response to push events
   #- name: Deploy application
