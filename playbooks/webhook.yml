@@ -18,18 +18,18 @@
   hosts: prodnodes
   gather_facts: false
   tasks:
-    - name: on_push
-      include_tasks: on_push.yml
-      when:
-        - etype == "push"
-        - eref == "main"
+  - name: on_push
+    include_tasks: on_push.yml
+    when:
+      - etype == "push"
+      - eref == "main"
       
 # Run action in response to push events
 - name: Respond to pull request event
   hosts: devnodes
   gather_facts: false
   tasks:
-    - name: on_pull
-      include_tasks: on_pr.yml
-      when:
-       - etype == "pull_request"
+  - name: on_pull
+    include_tasks: on_pr.yml
+    when:
+      - etype == "pull_request"
