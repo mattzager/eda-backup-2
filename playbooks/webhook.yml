@@ -13,19 +13,19 @@
 
   # Run action in response to push events
   - name: Respond to push event
-    condition: etype == "push"
     action:
       run_playbook:
         name: playbooks/on_push.yml
         post_events: true
+    when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
-    condition: etype == "pull_request"
     action:
       run_playbook:
         name: playbooks/on_pr.yml
         post_events: true
+    when: etype == "pull_request"
 
   # Run action in response to push events
   - name: Deploy application
