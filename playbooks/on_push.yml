@@ -1,6 +1,5 @@
 ---
 - name: push -- update application repo
-  hosts: localhost
   gather_facts: false
   tasks:
 
