@@ -4,6 +4,7 @@
   gather_facts: false
   tasks:
 
+  - name: set facts
   - set_fact:
       etype: "{{ awx_webhook_event_type }}"
       erepo: "{{ awx_webhook_payload.repository.name }}"
