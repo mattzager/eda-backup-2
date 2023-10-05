@@ -1,3 +1,8 @@
+- name: Ansible install
+  ansible.builtin.package:
+    name: ansible
+    state: present
+        
 - name: push -- Clone application repository 
   ansible.builtin.git:
     repo: "{{ awx_webhook_payload.repository.clone_url }}"
