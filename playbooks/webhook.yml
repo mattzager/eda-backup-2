@@ -16,7 +16,7 @@
     condition: etype == "push"
       action:
         run_playbook:
-          name: /tmp/eda-app/playbooks/on_push.yml
+          name: playbooks/on_push.yml
           post_events: true
 
   # Run action in response to push events
@@ -24,7 +24,7 @@
     condition: etype == "pull_request"
       action:
         run_playbook:
-          name: /tmp/eda-app/playbooks/on_pr.yml
+          name: playbooks/on_pr.yml
           post_events: true
 
   # Run action in response to push events
