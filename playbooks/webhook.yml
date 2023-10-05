@@ -15,13 +15,11 @@
   # Run action in response to push events
   - name: Respond to push event
     import_playbook: playbooks/on_push.yml
-        post_events: true
     when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
     import_playbook: playbooks/on_pr.yml
-        post_events: true
     when: etype == "pull_request"
 
   # Run action in response to push events
