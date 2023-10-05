@@ -1,6 +1,5 @@
 ---
 - name: pull_request -- update application repo
-  hosts: devnodes
   gather_facts: false
   tasks:
 
