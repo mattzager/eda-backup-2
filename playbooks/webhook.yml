@@ -14,22 +14,16 @@
 
   # Run action in response to push events
   - name: Respond to push event
-    action:
-      run_playbook:
-        name: playbooks/on_push.yml
+    import_playbook: playbooks/on_push.yml
         post_events: true
     when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
-    action:
-      run_playbook:
-        name: playbooks/on_pr.yml
+    import_playbook: playbooks/on_pr.yml
         post_events: true
     when: etype == "pull_request"
 
   # Run action in response to push events
   - name: Deploy application
-    action:
-      run_playbook:
-        name: /tmp/eda-app/deploy.yml
+    import_playbook: /tmp/eda-app/deploy.yml
