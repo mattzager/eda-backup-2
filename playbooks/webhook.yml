@@ -14,12 +14,12 @@
 
   # Run action in response to push events
   - name: Respond to push event
-    include_tasks: playbooks/on_push.yml
+    include_tasks: on_push.yml
     when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to pull request event
-    include_tasks: playbooks/on_pr.yml
+    include_tasks: on_pr.yml
     when: etype == "pull_request"
 
   # Run action in response to push events
