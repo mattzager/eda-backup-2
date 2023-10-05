@@ -25,5 +25,5 @@
 - name: Respond to pull request event
   hosts: devnodes
   include_tasks: on_pr.yml
-  when:
-    - etype == "pull_request"
+    when:
+      - etype == "pull_request"
