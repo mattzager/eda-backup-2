@@ -9,7 +9,6 @@
       etype: "{{ awx_webhook_event_type }}"
       erepo: "{{ awx_webhook_payload.repository.name }}"
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
-      eauthor: "{{ awx_webhook_payload.pusher.name }}"
       ecloneurl: "{{ awx_webhook_payload.repository.clone_url }}"
 
   # Run action in response to push events
