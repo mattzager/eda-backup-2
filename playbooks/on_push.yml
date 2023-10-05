@@ -4,3 +4,6 @@
     dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
     clone: true
     update: true
+
+- name: run container
+  ansible.builtin.include_tasks: "/tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml"
