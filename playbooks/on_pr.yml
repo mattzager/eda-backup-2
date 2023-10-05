@@ -7,4 +7,4 @@
     version: "{{ awx_webhook_payload.pull_request.head.ref }}"
 
 - name: run container
-  ansible.builtin.command: ansible-playbook "/tmp/{{ awx_webhook_payload.pull_request.head.ref }}/deploy.yml"
+  ansible.builtin.command: ansible-playbook "/tmp/{{ awx_webhook_payload.pull_request.head.ref }}/deploy.yml" --extravars "{'host_port':'8081','repo_author':'me','repo_ref':'branch'}"
