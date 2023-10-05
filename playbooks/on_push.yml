@@ -6,4 +6,4 @@
     update: true
 
 - name: run container
-  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml --extravars 'container_name=colorsprod host_port=8080 repo_author=me repo_ref=main'"
+  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml -e \"container_name=colorsprod host_port=8080 repo_author=me repo_ref=main\""
