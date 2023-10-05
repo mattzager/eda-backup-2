@@ -13,6 +13,11 @@
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
     when: etype == "push"
 
+  - name: set action
+    set_fact:
+      eaction: "{{ awx_webhook_payload.action }}"
+    when: etype == "pull_request"
+
 # Run action in response to push events
 - name: Respond to push event
   hosts: prodnodes
@@ -33,3 +38,4 @@
     include_tasks: on_pr.yml
     when:
       - etype == "pull_request"
+      - eaction == "opened"
