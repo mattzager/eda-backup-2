@@ -7,4 +7,4 @@
     version: "{{ awx_webhook_payload.pull_request.head.ref }}"
 
 - name: run container
-  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.pull_request.head.ref }}/deploy.yml -e \"container_name=colorsdev host_port=8081 repo_author=me repo_ref={{ awx_webhook_payload.pull_request.head.ref }}\""
+  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.pull_request.head.ref }}/deploy.yml -e \"container_name=colorsdev host_port=8081 repo_author={{ awx_webhook_payload.pull_request.user.login }} repo_ref={{ awx_webhook_payload.pull_request.head.ref }}\""
