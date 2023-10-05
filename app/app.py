@@ -2,7 +2,7 @@ import socket
 import random
 import os
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 
 import argparse
 
@@ -24,6 +24,7 @@ COLOR_FROM_ENV = os.environ.get('APP_COLOR')
 IMAGE_FROM_ENV = os.environ.get('APP_IMAGE') or str("https://github.com/ansible/instruqt/blob/main/assets/ansible-demo.png?raw=true")
 GITREF_FROM_ENV = os.environ.get('GITREF') or str("not specified")
 PUSHER_FROM_ENV = os.environ.get('PUSHER') or str("not specified")
+HOSTPORT_FROM_ENV = os.environ.get('HOSTPORT') or str("8080")
 # Generate a random color
 COLOR = random.choice(["red", "green", "blue", "ansiblue", "darkblue", "pink"])
 
@@ -31,7 +32,7 @@ COLOR = random.choice(["red", "green", "blue", "ansiblue", "darkblue", "pink"])
 @app.route("/")
 def main():
     # return 'Hello'
-    return render_template('hello.html', name=socket.gethostname(), color=color_codes[COLOR], pusher=PUSHER_FROM_ENV, gitref=GITREF_FROM_ENV, image=IMAGE_FROM_ENV)
+    return render_template('hello.html', name=socket.gethostname(), hostport=HOSTPORT_FROM_ENV, color=color_codes[COLOR], pusher=PUSHER_FROM_ENV, gitref=GITREF_FROM_ENV, image=IMAGE_FROM_ENV)
 
 
 if __name__ == "__main__":
