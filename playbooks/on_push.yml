@@ -1,12 +1,9 @@
-- hosts: prodnodes
+- name: push -- Clone application repository 
+  ansible.builtin.git:
+    repo: "{{ awx_webhook_payload.repository.clone_url }}"
+    dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
+    clone: true
+    update: true
 
-  tasks:
-  - name: push -- Clone application repository 
-    ansible.builtin.git:
-      repo: "{{ awx_webhook_payload.repository.clone_url }}"
-      dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
-      clone: true
-      update: true
-
-  - name: run container
-    ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml -e \"container_name=colorsprod host_port=8080 repo_author={{ awx_webhook_payload.pusher.name }} repo_ref=main\""
+- name: run container
+  ansible.builtin.command: "ansible-playbook /tmp/{{ awx_webhook_payload.repository.name }}/deploy.yml -e \"container_name=colorsprod host_port=8080 repo_author={{ awx_webhook_payload.pusher.name }} repo_ref=main\""
