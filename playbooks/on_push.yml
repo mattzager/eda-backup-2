@@ -1,10 +1,6 @@
----
-- name: push -- update application repo
-  tasks:
-
-  - name: push -- Clone application repository 
-    ansible.builtin.git:
-      repo: "{{ ecloneurl }}"
-      dest: "/tmp/{{ erepo }}"
-      clone: true
-      update: true
+- name: push -- Clone application repository 
+  ansible.builtin.git:
+    repo: "{{ ecloneurl }}"
+    dest: "/tmp/{{ erepo }}"
+    clone: true
+    update: true
