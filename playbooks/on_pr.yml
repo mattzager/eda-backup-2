@@ -1,13 +1,7 @@
----
-- name: pull_request -- update application repo
-  gather_facts: false
-  tasks:
-
-  - name: pull_request -- Update application repository to event ref 
-    ansible.builtin.git:
-      repo: "{{ ecloneurl }}"
-      dest: "/tmp/{{ erepo }}"
-      clone: true
-      update: true
-      version: "{{ eref }}"
-    register: repo_cloned
+- name: pull_request -- Update application repository to event ref 
+  ansible.builtin.git:
+    repo: "{{ ecloneurl }}"
+    dest: "/tmp/{{ erepo }}"
+    clone: true
+    update: true
+    version: "{{ eref }}"
