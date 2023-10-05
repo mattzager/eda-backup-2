@@ -11,7 +11,7 @@
   - name: set ref
     set_fact:
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
-    when: awx_webhook_payload.ref is defined
+    when: etype == "push"
 
   # Run action in response to push events
   - name: Respond to push event
