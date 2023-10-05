@@ -7,16 +7,20 @@
   - name: set facts
     set_fact:
       etype: "{{ awx_webhook_event_type }}"
+      eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
 
   # Run action in response to push events
   - name: Respond to push event
     include_tasks: on_push.yml
-    when: etype == "push"
+    when:
+      - etype == "push"
+      - eref == "main"
 
   # Run action in response to push events
   - name: Respond to pull request event
     include_tasks: on_pr.yml
-    when: etype == "pull_request"
+    when:
+      - etype == "pull_request"
 
   # Run action in response to push events
   #- name: Deploy application
