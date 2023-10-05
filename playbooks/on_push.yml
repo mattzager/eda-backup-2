@@ -1,6 +1,6 @@
 - name: push -- Clone application repository 
   ansible.builtin.git:
-    repo: "{{ ecloneurl }}"
-    dest: "/tmp/{{ erepo }}"
+    repo: "{{ awx_webhook_payload.repository.clone_url }}"
+    dest: "/tmp/{{ awx_webhook_payload.repository.name }}"
     clone: true
     update: true
