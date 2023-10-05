@@ -2,6 +2,7 @@
   ansible.builtin.package:
     name: ansible
     state: present
+  become: true
         
 - name: push -- Clone application repository 
   ansible.builtin.git:
