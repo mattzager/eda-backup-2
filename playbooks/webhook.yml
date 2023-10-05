@@ -1,8 +1,8 @@
 ---
 - name: Capture POSTs from git
-  #hosts: appnodes
-  #gather_facts: false
-  #tasks:
+  hosts: appnodes
+  gather_facts: false
+  tasks:
 
   - name: set type
     set_fact:
@@ -13,19 +13,17 @@
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
     when: etype == "push"
 
-  # Run action in response to push events
-  - name: Respond to push event
-    include_tasks: on_push.yml
+# Run action in response to push events
+- name: Respond to push event
+  hosts: prodnodes
+  include_tasks: on_push.yml
     when:
       - etype == "push"
       - eref == "main"
-
-  # Run action in response to push events
-  - name: Respond to pull request event
-    include_tasks: on_pr.yml
-    when:
-      - etype == "pull_request"
-
-  # Run action in response to push events
-  #- name: Deploy application
-  #  import_playbook: /tmp/eda-app/deploy.yml
+      
+# Run action in response to push events
+- name: Respond to pull request event
+  hosts: devnodes
+  include_tasks: on_pr.yml
+  when:
+    - etype == "pull_request"
