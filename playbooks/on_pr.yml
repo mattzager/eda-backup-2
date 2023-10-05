@@ -1,3 +1,9 @@
+- name: Ansible install
+  ansible.builtin.package:
+    name: ansible
+    state: present
+  become: true
+  
 - name: pull_request -- Update application repository to event ref 
   ansible.builtin.git:
     repo: "{{ awx_webhook_payload.repository.clone_url }}"
