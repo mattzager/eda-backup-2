@@ -5,7 +5,7 @@
   tasks:
 
   - name: set facts
-  - set_fact:
+    set_fact:
       etype: "{{ awx_webhook_event_type }}"
       erepo: "{{ awx_webhook_payload.repository.name }}"
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
