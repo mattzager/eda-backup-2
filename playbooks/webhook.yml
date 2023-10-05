@@ -4,10 +4,14 @@
   gather_facts: false
   tasks:
 
-  - name: set facts
+  - name: set type
     set_fact:
       etype: "{{ awx_webhook_event_type }}"
+      
+  - name: set ref
+    set_fact:
       eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
+    when: awx_webhook_payload.ref is defined
 
   # Run action in response to push events
   - name: Respond to push event
