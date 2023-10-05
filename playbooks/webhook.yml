@@ -1,0 +1,34 @@
+---
+- name: Capture POSTs from git
+  hosts: appnodes
+  gather_facts: false
+  tasks:
+
+  - set_fact:
+      etype: "{{ awx_webhook_event_type }}"
+      erepo: "{{ awx_webhook_payload.repository.name }}"
+      eref: "{{ awx_webhook_payload.ref | split('/') | last }}"
+      eauthor: "{{ awx_webhook_payload.pusher.name }}"
+      ecloneurl: "{{ awx_webhook_payload.repository.clone_url }}"
+
+  # Run action in response to push events
+  - name: Respond to push event
+    condition: etype == "push"
+      action:
+        run_playbook:
+          name: /tmp/eda-app/playbooks/on_push.yml
+          post_events: true
+
+  # Run action in response to push events
+  - name: Respond to pull request event
+    condition: etype == "pull_request"
+      action:
+        run_playbook:
+          name: /tmp/eda-app/playbooks/on_pr.yml
+          post_events: true
+
+  # Run action in response to push events
+  - name: Deploy application
+      action:
+        run_playbook:
+          name: /tmp/eda-app/deploy.yml
