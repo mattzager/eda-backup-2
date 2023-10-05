@@ -1,7 +1,6 @@
 ---
-- name: push -- update application repo
-  gather_facts: false
-  tasks:
+  - name: push -- update application repo
+    tasks:
 
   - name: push -- Clone application repository 
     ansible.builtin.git:
