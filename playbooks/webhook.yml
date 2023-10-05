@@ -1,8 +1,8 @@
 ---
 - name: Capture POSTs from git
-  hosts: appnodes
-  gather_facts: false
-  tasks:
+  #hosts: appnodes
+  #gather_facts: false
+  #tasks:
 
   - name: set type
     set_fact:
